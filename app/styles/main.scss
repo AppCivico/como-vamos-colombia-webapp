@@ -5,21 +5,25 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-// Core variables and mixins
-@import "defaults/variables";
+@import "defaults/colors";
+@import "elements/type";
+@import "elements/list";
+
+@import "components/navbar";
+@import "components/footer";
 
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.navbar-default {
-  background-image: linear-gradient(to right, rgb(63, 78, 173) 0%, rgb(108, 39, 132) 100%);
+body {
+  font-family: "Raleway", sans-serif;
 }
 
-.navbar-header > img {
-  height: 90px;
+section {
+  margin-bottom: 70px;
 }
 
-.navbar-nav > li > a  {
-  font-size: 18px;
+.main-label {
+  margin-left: 15px;
 }
