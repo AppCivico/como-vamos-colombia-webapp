@@ -47,12 +47,6 @@ function d3Map() {
   var mapLayer = g.append('g')
     .classed('map-layer', true);
 
-  var dummyText = g.append('text')
-    .classed('dummy-text', true)
-    .attr('x', 10)
-    .attr('y', 30)
-    .style('opacity', 0);
-
   var bigText = g.append('text')
     .classed('big-text', true)
     .attr('x', 20)
@@ -151,30 +145,7 @@ function d3Map() {
   var BASE_FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif";
 
   var FONTS = [
-    "Open Sans",
-    "Josefin Slab",
-    "Arvo",
-    "Lato",
-    "Vollkorn",
-    "Abril Fatface",
-    "Old StandardTT",
-    "Droid+Sans",
-    "Lobster",
-    "Inconsolata",
-    "Montserrat",
-    "Playfair Display",
-    "Karla",
-    "Alegreya",
-    "Libre Baskerville",
-    "Merriweather",
-    "Lora",
-    "Archivo Narrow",
-    "Neuton",
-    "Signika",
-    "Questrial",
-    "Fjalla One",
-    "Bitter",
-    "Varela Round"
+    "Helvetica Neue"
   ];
 
   function textArt(text){
