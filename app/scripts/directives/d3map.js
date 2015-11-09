@@ -90,7 +90,8 @@ function d3Map() {
 
   // Get province color
   function fillFn(d){
-    return color(nameLength(d));
+    return '#915299';
+    // return color(nameLength(d));
   }
 
   // When clicked, zoom in
