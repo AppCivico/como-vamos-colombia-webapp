@@ -8,7 +8,7 @@
  */
 
 function d3Map() {
-  var width = 960,
+  var width = 445,
     height = 500,
     centered;
 
