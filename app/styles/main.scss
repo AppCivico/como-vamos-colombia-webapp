@@ -5,10 +5,15 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+// Defaults
 @import "defaults/colors";
+
+// Elements
 @import "elements/type";
 @import "elements/list";
+@import "elements/forms";
 
+// Components
 @import "components/navbar";
 @import "components/footer";
 
