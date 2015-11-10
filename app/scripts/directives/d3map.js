@@ -12,6 +12,14 @@ function d3Map() {
     height = 500,
     centered;
 
+  // tooltip
+  var tooltip = d3.select('body').append('div').attr('id', 'tooltip');
+
+  var toolTipHTMLElement = function(stateName){
+    return "<span>"+ stateName +"</span>";
+  };
+
+
   // Define color scale
   var color = d3.scale.linear()
     .domain([1, 20])
@@ -46,11 +54,6 @@ function d3Map() {
 
   var mapLayer = g.append('g')
     .classed('map-layer', true);
-
-  var bigText = g.append('text')
-    .classed('big-text', true)
-    .attr('x', 20)
-    .attr('y', 45);
 
   // Load map data
   d3.json('colombia.geo.json', function(error, mapData) {
@@ -120,8 +123,15 @@ function d3Map() {
     // Highlight hovered province
     d3.select(this).style('fill', 'orange');
 
-    // Draw effects
-    textArt(nameFn(d));
+    // Show a tooltip on hover
+    var stateName = nameFn(d);
+
+    tooltip.transition().duration(200).style("opacity", .9);
+
+    // tooltip.html(toolTipHTMLElement( stateName+ ': $' + Humanize.formatNumber( investment, 2 ) +' USD' ))
+    tooltip.html(toolTipHTMLElement( stateName ))
+    .style("left", (d3.event.pageX) + "px")
+    .style("top", (d3.event.pageY - 28) + "px");
   }
 
   function mouseout(d){
@@ -135,7 +145,6 @@ function d3Map() {
       .remove();
 
     // Clear province name
-    bigText.text('');
   }
 
   // Gimmick
@@ -147,16 +156,6 @@ function d3Map() {
   var FONTS = [
     "Helvetica Neue"
   ];
-
-  function textArt(text){
-    // Use random font
-    var fontIndex = Math.round(Math.random() * FONTS.length);
-    var fontFamily = FONTS[fontIndex] + ', ' + BASE_FONT;
-
-    bigText
-      .style('font-family', fontFamily)
-      .text(text);
-  }
 }
 
 
