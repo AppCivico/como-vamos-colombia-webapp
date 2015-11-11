@@ -7,7 +7,7 @@
  * # d3Map
  */
 
-function d3Map() {
+function d3Map(element) {
   var width = 445,
     height = 500,
     centered;
@@ -36,7 +36,7 @@ function d3Map() {
     .projection(projection);
 
   // Set svg width & height
-  var svg = d3.select('svg')
+  var svg = d3.select(element)
     .attr('width', width)
     .attr('height', height);
 
@@ -138,24 +138,9 @@ function d3Map() {
     // Reset province color
     mapLayer.selectAll('path')
       .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
-
-    // Remove effect text
-    effectLayer.selectAll('text').transition()
-      .style('opacity', 0)
-      .remove();
-
-    // Clear province name
+      // Hide the tooltip
+      tooltip.transition().duration(500).style("opacity", 0);
   }
-
-  // Gimmick
-  // Just me playing around.
-  // You won't need this for a regular map.
-
-  var BASE_FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif";
-
-  var FONTS = [
-    "Helvetica Neue"
-  ];
 }
 
 
@@ -164,6 +149,8 @@ angular.module('comoVamosColombiaApp')
     return {
       template: '<svg></svg>',
       restrict: 'E',
-      link: d3Map,
+      link: function postLink(scope, element, attrs) {
+        d3Map(element[0].firstChild);
+      },
     };
   });
