@@ -9,16 +9,81 @@
  */
 angular.module('comoVamosColombiaApp')
   .service('Api', ['$http', function ($http) {
+    function uriParam(param) {
+      return '/' + param;
+    }
+
     var baseUrl = 'http://104.154.49.35:5000/';
-    var apiCall = {
+    var uri = {
       cities: baseUrl + 'cities',
+      indicator: function(city, indicator) {
+        return baseUrl + 'indicator' + uriParam(city) + uriParam(indicator);
+      },
     };
 
-    var _initialize = function() {
-      return $http.get(apiCall.cities);
+    var _cities = function() {
+      return $http.get(uri.cities);
     };
 
-    var _dummy = function() {
+    var _indicator = function(city, indicator) {
+      return $http.get(uri.indicator(city, indicator));
+    };
+
+    var _dummy_indicators = function(city, indicator) {
+      return [{
+          name: 'Tasa de Desempleo 1',
+          city: 'Bogotá',
+          type: 'objetivo',
+          timeline: [{
+            year: 1989,
+            value: 0.137679449
+          }, {
+            year: 1990,
+            value: 0.13449362
+          }, {
+            year: 1991,
+            value: 0.12050198
+          }, {
+            year: 1992,
+            value: 0.135813811
+          }, {
+            year: 1993,
+            value: 0.156584082
+          }, {
+            year: 1994,
+            value: 0.138943827
+          }, {
+            year: 1995,
+            value: 0.122501056
+          }, {
+            year: 1996,
+            value: 0.124101423
+          }, {
+            year: 1997,
+            value: 0.112241421
+          }, {
+            year: 1998,
+            value: 0.102
+          }]
+        },
+
+        // {
+        //   city: 'Ibengue',
+        //   timeline: [{
+        //     year: ______,
+        //     value: ________
+        //   }, {
+        //     year: ______,
+        //     value: ________
+        //   }, {
+        //     year: ______,
+        //     value: ________
+        //   }, ]
+        // },
+      ]
+    };
+
+    var _dummy_cities = function() {
       return [
           {
             "name": "Bogotá",
@@ -114,7 +179,11 @@ angular.module('comoVamosColombiaApp')
     };
 
     return {
-      initialize: _initialize,
-      dummy: _dummy
+      cities: _cities,
+      indicator: _indicator,
+
+      // dummy datasets
+      dummy_cities: _dummy_cities,
+      dummy_indicators: _dummy_indicators
     };
   }]);

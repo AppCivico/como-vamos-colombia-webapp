@@ -8,7 +8,7 @@
  * Controller of the comoVamosColombiaApp
  */
 angular.module('comoVamosColombiaApp')
-  .controller('MainCtrl', ['Api', 'Graph', function (Api, Graph) {
+  .controller('MainCtrl', ['$timeout', 'Api', 'Graph', function ($timeout, Api, Graph) {
       var self = this;
       self.firstSelectedOption = {
         city: undefined,
@@ -24,12 +24,11 @@ angular.module('comoVamosColombiaApp')
 
       self.initialize = function() {
         // Comment this when using real data
-        self.showChart = true;
-        self.data = Api.dummy();
-        self.chartConfig = Graph.chartConfig(self.data);
+        self.showChart = false;
+        self.data = Api.dummy_cities();
 
         // Uncomment this for real functionality
-        // Api.initialize().then(function successCallback(response){
+        // Api.cities().then(function successCallback(response){
         //   // Fetch graph config options
         //   // self.chartConfig = Graph.chartConfig(null);
         //   // self.showChart = true;
@@ -37,6 +36,20 @@ angular.module('comoVamosColombiaApp')
         //   console.error(response);
         //   // self.showChart = false;
         // });
+      };
+
+      self.drawGraph = function() {
+        self.showChart = true;
+
+        // Fetch the info to draw the graph
+
+
+
+        // Give time for the container to draw
+        $timeout(function(){
+          // self.chartConfig = Graph.chartConfig(self.data);
+          self.chartConfig = Graph.chartConfig(Api.dummy_indicators());
+        }, 1000);
       };
 
       self.initialize();

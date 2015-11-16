@@ -29,7 +29,7 @@
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <select class="form-control" name="" ng-model="main.firstSelectedOption.indicator" ng-options="option.name for option in main.firstSelectedOption.category.indicators">
+    <select class="form-control" name="" ng-model="main.firstSelectedOption.indicator" ng-options="option.name for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
     </select>
   </div>
@@ -50,7 +50,7 @@
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <select class="form-control" name="" ng-model="main.secondSelectedOption.indicator" ng-options="option.name for option in main.secondSelectedOption.category.indicators">
+    <select class="form-control" name="" ng-model="main.secondSelectedOption.indicator" ng-options="option.name for option in main.secondSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
     </select>
   </div>
