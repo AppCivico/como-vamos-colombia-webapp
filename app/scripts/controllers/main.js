@@ -27,6 +27,8 @@ angular.module('comoVamosColombiaApp')
         self.showChart = false;
         self.data = Api.dummy_cities();
 
+        self.drawGraph();
+
         // Uncomment this for real functionality
         // Api.cities().then(function successCallback(response){
         //   // Fetch graph config options
@@ -41,9 +43,11 @@ angular.module('comoVamosColombiaApp')
       self.drawGraph = function() {
         self.showChart = true;
 
-        // Fetch the info to draw the graph
+        // Fetch the info indicator 1 to draw the graph
+        // Code here..
 
-
+        // Fetch the info indicator 2 to draw the graph
+        // Code here..
 
         // Give time for the container to draw
         $timeout(function(){

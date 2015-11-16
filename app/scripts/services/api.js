@@ -35,52 +35,75 @@ angular.module('comoVamosColombiaApp')
           city: 'Bogotá',
           type: 'objetivo',
           timeline: [{
-            year: 1989,
-            value: 0.137679449
+            'year': 1989,
+            'value': 0.137679449
           }, {
-            year: 1990,
-            value: 0.13449362
+            'year': 1990,
+            'value': 0.13449362
           }, {
-            year: 1991,
-            value: 0.12050198
+            'year': 1991,
+            'value': 0.12050198
           }, {
-            year: 1992,
-            value: 0.135813811
+            'year': 1992,
+            'value': 0.135813811
           }, {
-            year: 1993,
-            value: 0.156584082
+            'year': 1993,
+            'value': 0.156584082
           }, {
-            year: 1994,
-            value: 0.138943827
+            'year': 1994,
+            'value': 0.138943827
           }, {
-            year: 1995,
-            value: 0.122501056
+            'year': 1995,
+            'value': 0.122501056
           }, {
-            year: 1996,
-            value: 0.124101423
+            'year': 1996,
+            'value': 0.124101423
           }, {
-            year: 1997,
-            value: 0.112241421
+            'year': 1997,
+            'value': 0.112241421
           }, {
-            year: 1998,
-            value: 0.102
+            'year': 1998,
+            'value': 0.102
           }]
         },
 
-        // {
-        //   city: 'Ibengue',
-        //   timeline: [{
-        //     year: ______,
-        //     value: ________
-        //   }, {
-        //     year: ______,
-        //     value: ________
-        //   }, {
-        //     year: ______,
-        //     value: ________
-        //   }, ]
-        // },
-      ]
+        {
+            name: 'Variable categórica',
+            city: 'Ibengue',
+            type: 'subjetivo ordinal',
+            timeline: [{
+              'year': 1989,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1990,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1991,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1992,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1993,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1994,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }, {
+              'year': 1995,
+              'value': [{name: 'Sí', value: 0.6175 }, {name: 'No', value: 0.3825 }]
+            }, {
+              'year': 1996,
+              'value': [{name: 'Sí', value: 0.39 }, {name: 'No', value: 0.61 }]
+            }, {
+              'year': 1997,
+              'value': [{name: 'Sí', value: 0.45 }, {name: 'No', value: 0.55 }]
+            }, {
+              'year': 1998,
+              'value': [{name: 'Sí', value: 0 }, {name: 'No', value: 0 }]
+            }]
+          },
+      ];
     };
 
     var _dummy_cities = function() {
