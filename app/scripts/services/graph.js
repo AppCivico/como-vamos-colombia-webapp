@@ -9,6 +9,15 @@
  */
 angular.module('comoVamosColombiaApp')
   .service('Graph', ['Defaults', 'lodash', function (Defaults, lodash) {
+      var _buildChartTitle = function(datum) {
+        if(datum.length > 1) {
+          console.log(datum[0].name + ' vs ' + datum[1].name);
+          return datum[0].name + ' vs ' + datum[1].name
+        }
+        console.log(datum[0].name);
+        return datum[0].name;
+      };
+
       var _buildObjectiveLine = function(indicatorName, indicatorCity, indicatorData){
         var _serie = {
           name: indicatorName,
@@ -60,7 +69,7 @@ angular.module('comoVamosColombiaApp')
         return _stacks;
       };
 
-      var buildGraphSeries = function(datum) {
+      var _buildGraphSeries = function(datum) {
         return lodash.flatten(lodash.map(datum, function(indicatorData){
           // Determine which kind of line we're building
           switch(indicatorData.type) {
@@ -78,8 +87,8 @@ angular.module('comoVamosColombiaApp')
 
       var _chartConfig = function(datum) {
         return {
-          "options": {
-            "chart": {
+          options: {
+            chart: {
               zoomType: 'xy'
             },
             plotOptions: {
@@ -126,7 +135,10 @@ angular.module('comoVamosColombiaApp')
                 opposite: true
             }],
           },
-          series: buildGraphSeries(datum),
+          series: _buildGraphSeries(datum),
+          title: {
+            text: _buildChartTitle(datum)
+          }
         };
       };
 

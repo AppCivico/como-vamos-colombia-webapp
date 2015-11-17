@@ -45,9 +45,19 @@ angular.module('comoVamosColombiaApp')
 
         // Fetch the info indicator 1 to draw the graph
         // Code here..
+        // eg. Api.indicator(self.firstSelectedOption.city, self.firstSelectedOption.indicator).then(function successCallback(){
+        //    success code here ....
+        // }, function errorCallback(){
+        //    error code here ....
+        // })
 
         // Fetch the info indicator 2 to draw the graph
         // Code here..
+        // eg. Api.indicator(self.secondSelectedOption.city, self.secondSelectedOption.indicator).then(function successCallback(){
+        //    success code here ....
+        // }, function errorCallback(){
+        //    error code here ....
+        // })
 
         // Give time for the container to draw
         $timeout(function(){
