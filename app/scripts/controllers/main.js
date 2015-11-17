@@ -52,7 +52,7 @@ angular.module('comoVamosColombiaApp')
         // Give time for the container to draw
         $timeout(function(){
           // self.chartConfig = Graph.chartConfig(self.data);
-          self.chartConfig = Graph.chartConfig(Api.dummy_indicators());
+          self.chartConfig = Graph.chartConfig([Api.dummy_indicator_1(), Api.dummy_indicator_2()]);
         }, 1000);
       };
 
