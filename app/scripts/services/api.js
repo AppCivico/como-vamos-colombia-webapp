@@ -10,14 +10,18 @@
 angular.module('comoVamosColombiaApp')
   .service('Api', ['$http', function ($http) {
     function uriParam(param) {
-      return '/' + param;
+      if (typeof param != "undefined") {
+        return param.name;
+      }
+      return param;
     }
 
-    var baseUrl = 'http://104.154.49.35:5000/';
+    var baseUrl = 'http://localhost:5000/';
     var uri = {
       cities: baseUrl + 'cities',
       indicator: function(city, indicator) {
-        return baseUrl + 'indicator' + uriParam(city) + uriParam(indicator);
+        console.log(baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator));
+        return baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator);
       },
     };
 
@@ -200,7 +204,6 @@ angular.module('comoVamosColombiaApp')
           }
         ];
     };
-
     return {
       cities: _cities,
       indicator: _indicator,
