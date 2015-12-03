@@ -8,7 +8,7 @@
  * Controller of the comoVamosColombiaApp
  */
 angular.module('comoVamosColombiaApp')
-  .controller('MainCtrl', ['$timeout', 'Api', 'Graph', function ($timeout, Api, Graph) {
+  .controller('MainCtrl', ['$timeout', '$scope', 'Api', 'Graph', function ($timeout, $scope, Api, Graph) {
       var self = this;
       self.firstSelectedOption = {
         city: undefined,
@@ -70,8 +70,36 @@ angular.module('comoVamosColombiaApp')
              self.showChart = false;
          })
 
+         var cities_indicator_1 = []
+         Api.cities_indicator(self.firstSelectedOption.indicator).then(function successCallback(response){
+             response.data.forEach(function(val, i) {
+                 cities_indicator_1.push(val);
+             });
+         }, function errorCallback(response){
+             console.error(response);
+             self.showChart = false;
+         })
+
+         var cities_indicator_2 = []
+         Api.cities_indicator(self.secondSelectedOption.indicator).then(function successCallback(response){
+             response.data.forEach(function(val, i) {
+                 cities_indicator_2.push(val);
+             });
+         }, function errorCallback(response){
+             console.error(response);
+             self.showChart = false;
+         })
+         // Get the characteristics of the questions.
+
+
         // Give time for the container to draw
         $timeout(function(){
+          $scope.name_1 = indicator_1[0].name
+          $scope.description_1 = indicator_1[0].description
+          $scope.cities_indicator_1 = cities_indicator_1
+          $scope.name_2 = indicator_2[0].name
+          $scope.description_2= indicator_2[0].description
+          $scope.cities_indicator_2 = cities_indicator_2
 
           //self.chartConfig = Graph.chartConfig([Api.dummy_indicator_1(), Api.dummy_indicator_2()]);
           self.chartConfig = Graph.chartConfig([indicator_1[0], indicator_2[0]]);

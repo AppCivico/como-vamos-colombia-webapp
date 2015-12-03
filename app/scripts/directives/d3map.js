@@ -7,7 +7,11 @@
  * # d3Map
  */
 
-function d3Map(element) {
+function d3Map(indicator,element) {
+
+  var city_data = JSON.parse(indicator)
+  console.log(city_data)
+
   var width = 445,
     height = 500,
     centered;
@@ -29,7 +33,7 @@ function d3Map(element) {
   var projection = d3.geo.mercator()
     .scale(1500)
     // Center the Map in Colombia
-    .center([-74, 4.5])
+    .center([-73.0803761873264, 3.90664967018724])
     .translate([width / 2, height / 2]);
 
   var path = d3.geo.path()
@@ -55,6 +59,9 @@ function d3Map(element) {
   var mapLayer = g.append('g')
     .classed('map-layer', true);
 
+
+
+
   // Load map data
   d3.json('colombia.geo.json', function(error, mapData) {
     var features = mapData.features;
@@ -68,15 +75,22 @@ function d3Map(element) {
       .enter().append('path')
         .attr('d', path)
         .attr('vector-effect', 'non-scaling-stroke')
-        .style('fill', fillFn)
+        .style('fill', fillFn);
+
+    mapLayer.selectAll().data(city_data)
+        .enter().append("circle")
+        .attr("cy", function (d) { return projection([d.longitude,d.latitude])[1]} )
+        .attr("cx", function (d) { return projection([d.longitude,d.latitude])[0]} )
+        .attr("r", 5)
         .on('mouseover', mouseover)
-        .on('mouseout', mouseout)
-        .on('click', clicked);
+        .on('mouseout', mouseout);
+
   });
+
 
   // Get province name
   function nameFn(d){
-    return d && d.properties ? d.properties.NOMBRE_DPT : null;
+    return d ? d.city : null;
   }
 
   // Get province name length
@@ -136,6 +150,7 @@ function d3Map(element) {
 
   function mouseout(d){
     // Reset province color
+    d3.select(this).style('fill', 'white');
     mapLayer.selectAll('path')
       .style('fill', function(d){return centered && d===centered ? '#D5708B' : fillFn(d);});
       // Hide the tooltip
@@ -148,9 +163,12 @@ angular.module('comoVamosColombiaApp')
   .directive('d3Map', function () {
     return {
       template: '<svg></svg>',
+      scope: { indicator: '@indicator' },
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        d3Map(element[0].firstChild);
+        scope.$watch("indicator",function(newValue,oldValue){
+          d3Map(scope.indicator,element[0].firstChild);
+        });
       },
     };
   });

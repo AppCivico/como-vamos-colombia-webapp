@@ -19,6 +19,9 @@ angular.module('comoVamosColombiaApp')
     var baseUrl = 'http://localhost:5000/';
     var uri = {
       cities: baseUrl + 'cities',
+      cities_indicator: function(indicator) {
+        return baseUrl + 'cities_with_indicator?indicator=' + uriParam(indicator);
+      },
       indicator: function(city, indicator) {
         console.log(baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator));
         return baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator);
@@ -27,6 +30,10 @@ angular.module('comoVamosColombiaApp')
 
     var _cities = function() {
       return $http.get(uri.cities);
+    };
+
+    var _cities_indicator = function(indicator) {
+      return $http.get(uri.cities_indicator(indicator))
     };
 
     var _indicator = function(city, indicator) {
@@ -207,6 +214,7 @@ angular.module('comoVamosColombiaApp')
     return {
       cities: _cities,
       indicator: _indicator,
+      cities_indicator: _cities_indicator,
 
       // dummy datasets
       dummy_cities: _dummy_cities,

@@ -11,26 +11,27 @@ angular.module('comoVamosColombiaApp')
   .service('Graph', ['Defaults', 'lodash', function (Defaults, lodash) {
       var _buildChartTitle = function(datum) {
         if(datum.length > 1) {
-          return datum[0].name + ' vs ' + datum[1].name
+          return datum[0].name + ' vs ' + datum[1].name;
         }
           return datum[0].name;
         }
 
-      var _buildObjectiveLine = function(indicatorName, indicatorCity, indicatorTimeline,DataAxis){
+      var _buildObjectiveLine = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline, IndicatorUnits, DataAxis){
         var _serie = {
           name: indicatorName,
           type: 'spline',
-          stack: 1,
+          stack: DataAxis,
+          zIndex: 2,
           // tooltip options missing to build
-          // tooltip: {
-          //   valueSuffix: ' S/U'
-          // }
+          tooltip: {
+             valueSuffix: ' ' + IndicatorUnits
+           }
           // add other options as needed
         };
 
         // Build the data object
         _serie.data =  lodash.map(indicatorTimeline, function(data){
-          return [data.year.toString(), parseFloat(data.value)];
+          return [parseFloat(data.year), parseFloat(data.value)];
         });
         _serie.yAxis = DataAxis;
 
@@ -38,7 +39,7 @@ angular.module('comoVamosColombiaApp')
         return _serie;
       };
 
-      var _buildSubjectiveCategorical = function(indicatorName, indicatorCity, indicatorTimeline,DataAxis) {
+      var _buildSubjectiveCategorical = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline,IndicatorUnits,DataAxis) {
         if(indicatorTimeline.length === 0 ) return ;
 
         // Get the name of the stacks from first data point
@@ -52,14 +53,18 @@ angular.module('comoVamosColombiaApp')
           var _serie = {
             name: stackName,
             type: 'column',
-            yAxis: DataAxis
-            // add other options as needed
+            yAxis: DataAxis,
+            stack: DataAxis,
+            zIndex: 1,
+            tooltip: {
+               valueSuffix: ' ' + IndicatorUnits
+             }
           };
 
           // Build the data object
           _serie.data =  lodash.map(indicatorTimeline, function(data){
             var _value = lodash.result( lodash.findWhere(data.value, { 'name': stackName }), 'value');
-            return [data.year.toString(), parseFloat(_value)];
+            return [parseFloat(data.year), parseFloat(_value)];
           });
 
           return _serie;
@@ -71,21 +76,24 @@ angular.module('comoVamosColombiaApp')
       var _buildGraphSeries = function(datum) {
         var DataAxis = -1;
         return lodash.flatten(lodash.map(datum, function(indicatorData){
+          var indicatorDataUnits = indicatorData.units;
+          if(indicatorDataUnits=="NaN"){
+            indicatorDataUnits=""
+          }
           // Determine which kind of line we're building
           if (indicatorData.timeline.length > 0) {
             switch(indicatorData.type) {
-
               case 'objetivo':
               DataAxis = DataAxis + 1
-              return _buildObjectiveLine(indicatorData.name, indicatorData.city, indicatorData.timeline, DataAxis);
+              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
               case 'subjetivo ordinal':
               DataAxis = DataAxis + 1
-              return _buildObjectiveLine(indicatorData.name, indicatorData.city, indicatorData.timeline, DataAxis);
+              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
               case 'subjetivo categorico':
               DataAxis = DataAxis + 1
-              return _buildSubjectiveCategorical(indicatorData.name, indicatorData.city, indicatorData.timeline, DataAxis);
+              return _buildSubjectiveCategorical(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
             }}}));
       };
@@ -93,9 +101,9 @@ angular.module('comoVamosColombiaApp')
 
       var _chartConfig = function(datum) {
         datum = datum.filter(function(n){ return n.name != undefined });
-        console.log(datum)
         return {
           options: {
+            credits: false ,
             chart: {
               zoomType: 'xy'
             },
@@ -132,6 +140,12 @@ angular.module('comoVamosColombiaApp')
                     }
                 }
             }, { // Secondary yAxis
+                title: {
+                    text: '',
+                    style: {
+                      color: '#000'
+                    }
+                },
                 labels: {
                     formatter: function () {
                         return this.value;

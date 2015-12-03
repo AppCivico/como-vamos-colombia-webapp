@@ -1,16 +1,14 @@
 <section class="text-center">
-  <h1>Visualización ¿Cómo Vamos Colombia?</h1>
+  <h1>Conoce los datasets</h1>
 </section>
 
   <section>
     <p>
-      Pequeña descripción de qué es, qué hace, cómo funciona. Lorem ipsum dolor
-      sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-      eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-      sunt in culpa qui officia deserunt mollit anim id est laborum.
+      Bienvenido a la aplicación de Datos Abiertos de la Red Como Vamos del país
+      de Colombia. En esta aplicación podrás explorar los datos disponibles en los
+      repositorios de datos. Selecciona una ciudad, un tema y la variable que busques
+      y compárala contra otra. Esta aplicación sigue en desarrollo, por lo que
+      esperamos que puedas usarla y reportar cualquier anomalía.
     </p>
   </section>
 
@@ -20,16 +18,16 @@
   </p>
   <div class="col-xs-12 col-sm-4">
     <select class="form-control" name="" ng-model="main.firstSelectedOption.city" ng-options="option.name for option in main.data">
-      <!-- <option>Bogotá</option> -->
+      <option value=""> Selecciona una Ciudad ... </option>
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
     <select class="form-control" name="" ng-model="main.firstSelectedOption.category" ng-options="option.name for option in main.firstSelectedOption.city.categories">
-      <!-- <option>Optimismo y bienestar</option> -->
+      <option value=""> Selecciona un tema ... </option>
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <select chosen class="form-control" name="" data-placeholder="Selecciona un Indicador..." options="main.firstSelectedOption.category.indicators" ng-model="main.firstSelectedOption.indicator" ng-options="option.name for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
+    <select chosen class="form-control" name="" data-placeholder="Selecciona un Indicador..." options="main.firstSelectedOption.category.indicators" ng-model="main.firstSelectedOption.indicator" ng-options="option.description for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
     </select>
   </div>
@@ -41,63 +39,59 @@
   </p>
   <div class="col-xs-12 col-sm-4">
     <select class="form-control" name="" ng-model="main.secondSelectedOption.city" ng-options="option.name for option in main.data">
-      <!-- <option>Bogotá</option> -->
+      <option value=""> Selecciona una Ciudad ... </option>
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
     <select class="form-control" name="" ng-model="main.secondSelectedOption.category" ng-options="option.name for option in main.secondSelectedOption.city.categories">
-      <!-- <option>Optimismo y bienestar</option> -->
+      <option value=""> Selecciona un tema ... </option>
     </select>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <select chosen class="form-control"name="" data-placeholder="Selecciona un Indicador..." options="main.secondSelectedOption.category.indicators" ng-model="main.secondSelectedOption.indicator" ng-options="option.name for option in main.secondSelectedOption.category.indicators" ng-change="main.drawGraph()">
+    <select chosen class="form-control"name="" data-placeholder="Selecciona un Indicador..." options="main.secondSelectedOption.category.indicators" ng-model="main.secondSelectedOption.indicator" ng-options="option.description for option in main.secondSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
     </select>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+  <br>
+  <br>
+    <div class="col-xs-12 col-sm-6">
+      <div class="poll_experience">
+        <p>
+          <strong>{{main.firstSelectedOption.indicator.name}}</strong> {{main.firstSelectedOption.indicator.description}}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+      <div class="poll_experience">
+        <p>
+          <strong>{{main.secondSelectedOption.indicator.name}}</strong> {{main.secondSelectedOption.indicator.description}}
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="text-center">
   <!-- <h1>Nombre del indicador</h1> -->
   <highchart id="chart1" config="main.chartConfig" ng-show="main.showChart"></highchart>
+  <a href="http://localhost:5000/data.csv?city_1={{main.firstSelectedOption.city.name}}&indicator_1={{main.firstSelectedOption.indicator.name}}&city_2={{main.secondSelectedOption.city.name}}&indicator_2={{main.secondSelectedOption.indicator.name}}">Descarga los datos</a>
 </section>
 
 <section>
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <h3>Variable 1</h3>
-      <d3-map></d3-map>
+      <h3>La variable {{main.firstSelectedOption.indicator.name}} está también en:</h3>
+      <d3-map indicator={{cities_indicator_1}}></d3-map>
     </div>
 
     <div class="col-xs-12 col-sm-6">
-      <h3>Variable 2</h3>
-      <d3-map></d3-map>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="poll_experience">
-        <p>
-          <strong>Some variable description.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6">
-      <div class="poll_experience">
-        <p>
-          <strong>Some poll description.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <ul>
-          <li><span class="index">1.</span>Muy Mala</li>
-          <li><span class="index">2.</span>Mala</li>
-          <li><span class="index">3.</span>Regular</li>
-          <li><span class="index">4.</span>Buena</li>
-          <li><span class="index">5.</span>Muy buena</li>
-        </ul>
-      </div>
+      <h3>La variable {{main.secondSelectedOption.indicator.name}} está también en:</h3>
+      <d3-map indicator={{cities_indicator_2}}></d3-map>
     </div>
   </div>
 </section>
