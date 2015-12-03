@@ -16,7 +16,7 @@ angular.module('comoVamosColombiaApp')
       return param;
     }
 
-    var baseUrl = 'http://localhost:5000/';
+    var baseUrl = 'http://104.197.100.142:5000/';
     var uri = {
       cities: baseUrl + 'cities',
       cities_indicator: function(indicator) {
