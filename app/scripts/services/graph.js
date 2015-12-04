@@ -18,7 +18,7 @@ angular.module('comoVamosColombiaApp')
 
       var _buildObjectiveLine = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline, IndicatorUnits, DataAxis){
         var _serie = {
-          name: indicatorName,
+          name: indicatorCity,
           type: 'spline',
           stack: DataAxis,
           zIndex: 2,
@@ -75,24 +75,42 @@ angular.module('comoVamosColombiaApp')
 
       var _buildGraphSeries = function(datum) {
         var DataAxis = -1;
+        if (datum.length > 1){
+          if (datum[0].name == datum[1].name){
+            var shareaxis = 1
+          };
+        } else {
+          shareaxis = 0
+        };
         return lodash.flatten(lodash.map(datum, function(indicatorData){
           var indicatorDataUnits = indicatorData.units;
           if(indicatorDataUnits=="NaN"){
             indicatorDataUnits=""
-          }
+          };
+
+
           // Determine which kind of line we're building
           if (indicatorData.timeline.length > 0) {
             switch(indicatorData.type) {
               case 'objetivo':
-              DataAxis = DataAxis + 1
+              DataAxis = DataAxis + 1;
+              if(shareaxis == 1){
+                DataAxis = 0
+              };
               return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
               case 'subjetivo ordinal':
-              DataAxis = DataAxis + 1
+              DataAxis = DataAxis + 1;
+              if(shareaxis == 1){
+                DataAxis = 0
+              };
               return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
               case 'subjetivo categorico':
-              DataAxis = DataAxis + 1
+              DataAxis = DataAxis + 1;
+              if(shareaxis == 1){
+                DataAxis = 0
+              };
               return _buildSubjectiveCategorical(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
 
             }}}));
