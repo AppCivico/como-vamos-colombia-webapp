@@ -54,44 +54,46 @@
   </div>
 </section>
 
-<section>
-  <div class="row">
-  <br>
-  <br>
-    <div class="col-xs-12 col-sm-6">
-      <div class="poll_experience">
-        <p>
-          <strong>{{main.firstSelectedOption.indicator.name}}</strong> {{main.firstSelectedOption.indicator.description}}
-        </p>
+<div class="hidden" id="graph-area">
+  <section>
+    <div class="row">
+    <br>
+    <br>
+      <div class="col-xs-12 col-sm-6">
+        <div class="poll_experience">
+          <p>
+            <strong>{{main.firstSelectedOption.indicator.name}}</strong> {{main.firstSelectedOption.indicator.description}}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="poll_experience">
+          <p>
+            <strong>{{main.secondSelectedOption.indicator.name}}</strong> {{main.secondSelectedOption.indicator.description}}
+          </p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="col-xs-12 col-sm-6">
-      <div class="poll_experience">
-        <p>
-          <strong>{{main.secondSelectedOption.indicator.name}}</strong> {{main.secondSelectedOption.indicator.description}}
-        </p>
+  <section class="text-center">
+    <!-- <h1>Nombre del indicador</h1> -->
+    <highchart id="chart1" config="main.chartConfig" ng-show="main.showChart"></highchart>
+    <a href="http://104.197.100.142:5000/data.csv?city_1={{main.firstSelectedOption.city.name}}&indicator_1={{main.firstSelectedOption.indicator.name}}&city_2={{main.secondSelectedOption.city.name}}&indicator_2={{main.secondSelectedOption.indicator.name}}">Descarga los datos</a>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>La variable {{main.firstSelectedOption.indicator.name}} está también en:</h3>
+        <d3-map indicator={{cities_indicator_1}}></d3-map>
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <h3>La variable {{main.secondSelectedOption.indicator.name}} está también en:</h3>
+        <d3-map indicator={{cities_indicator_2}}></d3-map>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="text-center">
-  <!-- <h1>Nombre del indicador</h1> -->
-  <highchart id="chart1" config="main.chartConfig" ng-show="main.showChart"></highchart>
-  <a href="http://104.197.100.142:5000/data.csv?city_1={{main.firstSelectedOption.city.name}}&indicator_1={{main.firstSelectedOption.indicator.name}}&city_2={{main.secondSelectedOption.city.name}}&indicator_2={{main.secondSelectedOption.indicator.name}}">Descarga los datos</a>
-</section>
-
-<section>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <h3>La variable {{main.firstSelectedOption.indicator.name}} está también en:</h3>
-      <d3-map indicator={{cities_indicator_1}}></d3-map>
-    </div>
-
-    <div class="col-xs-12 col-sm-6">
-      <h3>La variable {{main.secondSelectedOption.indicator.name}} está también en:</h3>
-      <d3-map indicator={{cities_indicator_2}}></d3-map>
-    </div>
-  </div>
-</section>
+  </section>
+</div>

@@ -48,6 +48,12 @@ angular.module('comoVamosColombiaApp')
       };
 
       self.drawGraph = function() {
+
+        if(self.firstSelectedOption.indicator != undefined | self.secondSelectedOption.indicator != undefined){
+          var NAME = document.getElementById("graph-area")
+          NAME.className = "visible";
+        }
+
         self.showChart = true;
         var indicator_1 = []
         Api.indicator(self.firstSelectedOption.city, self.firstSelectedOption.indicator).then(function successCallback(response){
