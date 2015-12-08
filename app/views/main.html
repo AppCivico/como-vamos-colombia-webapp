@@ -77,13 +77,12 @@
       </div>
     </div>
   </section>
-  <div id="container" style="width:100%;margin: 0 auto">
-    <section class="text-center">
-        <!-- <h1>Nombre del indicador</h1> -->
-      <highchart id="chart1" config="main.chartConfig" ng-show="main.showChart"></highchart>
-      <a href="http://104.197.100.142:5000/data.csv?city_1={{main.firstSelectedOption.city.name}}&indicator_1={{main.firstSelectedOption.indicator.name}}&city_2={{main.secondSelectedOption.city.name}}&indicator_2={{main.secondSelectedOption.indicator.name}}">Descarga los datos</a>
-    </section>
-  </div>
+
+  <section class="text-center">
+      <!-- <h1>Nombre del indicador</h1> -->
+    <highchart id="chart1" config="main.chartConfig" ng-show="main.showChart"></highchart>
+    <a href="http://104.197.100.142:5000/data.csv?city_1={{main.firstSelectedOption.city.name}}&indicator_1={{main.firstSelectedOption.indicator.name}}&city_2={{main.secondSelectedOption.city.name}}&indicator_2={{main.secondSelectedOption.indicator.name}}">Descarga los datos</a>
+  </section>
 
 
   <section>

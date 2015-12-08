@@ -111,6 +111,7 @@ angular.module('comoVamosColombiaApp')
           self.chartConfig = Graph.chartConfig([indicator_1[0], indicator_2[0]]);
           console.log(self.chartConfig)
         }, 1000);
+        $(window).resize();
       };
 
       self.initialize();
