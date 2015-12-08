@@ -177,7 +177,9 @@ angular.module('comoVamosColombiaApp')
           },
           series: _buildGraphSeries(datum),
           title: {
-            text: _buildChartTitle(datum)
+            // Removed due client observation
+            // text: _buildChartTitle(datum)
+            text: " "
           }
         };
       };

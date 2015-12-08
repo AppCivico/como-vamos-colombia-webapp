@@ -4,11 +4,12 @@
 
   <section>
     <p>
-      Bienvenido a la aplicación de Datos Abiertos de la Red Como Vamos del país
-      de Colombia. En esta aplicación podrás explorar los datos disponibles en los
-      repositorios de datos. Selecciona una ciudad, un tema y la variable que busques
-      y compárala contra otra. Esta aplicación sigue en desarrollo, por lo que
-      esperamos que puedas usarla y reportar cualquier anomalía.
+      Bienvenido a la aplicación de Datos Abiertos de la Red de Ciudades Como Vamos Colombia.
+      En esta aplicación podrás explorar los datos históricos comparables y no comparables
+      de las 11 ciudades Cómo Vamos. Selecciona una ciudad, el tipo de indicador
+      que quieres visualizar (objetivo-subjetivo), un tema, la variable de interés y
+      compárala frente a otra en una diferente ciudad de la Red. Debido al gran número de variables,
+      esta aplicación está en continuo desarrollo, por lo que esperamos tu retroalimentación.
     </p>
   </section>
 
@@ -86,12 +87,12 @@
   <section>
     <div class="row">
       <div class="col-xs-12 col-sm-6">
-        <h3>La variable {{main.firstSelectedOption.indicator.name}} está también en:</h3>
+        <h3>La variable 1 está también en:</h3>
         <d3-map indicator={{cities_indicator_1}}></d3-map>
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <h3>La variable {{main.secondSelectedOption.indicator.name}} está también en:</h3>
+        <h3>La variable 2 está también en:</h3>
         <d3-map indicator={{cities_indicator_2}}></d3-map>
       </div>
     </div>
