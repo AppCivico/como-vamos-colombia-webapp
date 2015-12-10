@@ -62,6 +62,10 @@ select.form-control + .chosen-container .chosen-results {
     margin-bottom: 5px;
 }
 
+select.form-control + .chosen-container .chosen-results li.group-result {
+    font-weight: bold;
+}
+
 select.form-control + .chosen-container .chosen-results li ,
 select.form-control + .chosen-container .chosen-results li.active-result {
     display: block;
