@@ -51,7 +51,7 @@ angular.module('comoVamosColombiaApp')
         // Build stack objects
         var _stacks = lodash.map(_options, function(stackName){
           var _serie = {
-            name: stackName,
+            name: indicatorCity + ":" + stackName,
             type: 'column',
             yAxis: DataAxis,
             stack: DataAxis,
