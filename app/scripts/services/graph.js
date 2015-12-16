@@ -16,7 +16,15 @@ angular.module('comoVamosColombiaApp')
           return datum[0].name;
         }
 
-      var _buildObjectiveLine = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline, IndicatorUnits, DataAxis){
+      var _buildColorPallete = function(DataIndex) {
+        switch(DataIndex) {
+          case 0:
+            return ["FF7863","FF8558","FF924D","FF9F42","FFAC37","FFB92C","FFC621","FFD316","FFE00B","FFED00"]
+          case 1:
+            return ["E3000F","E61227","E9243F","EC3758","EF4970","F25C88","F56EA1","F881B9","FB93D1","FFA6EA"]
+      }
+
+      var _buildObjectiveLine = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline, IndicatorUnits, DataAxis, DataIndex){
         var _serie = {
           name: indicatorCity,
           type: 'spline',
@@ -25,7 +33,8 @@ angular.module('comoVamosColombiaApp')
           // tooltip options missing to build
           tooltip: {
              valueSuffix: ' ' + IndicatorUnits
-           }
+           },
+          color: _buildColorPallete(DataIndex)
           // add other options as needed
         };
 
@@ -39,7 +48,7 @@ angular.module('comoVamosColombiaApp')
         return _serie;
       };
 
-      var _buildSubjectiveCategorical = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline,IndicatorUnits,DataAxis) {
+      var _buildSubjectiveCategorical = function(indicatorName, indicatorDescription, indicatorCity, indicatorTimeline,IndicatorUnits,DataAxis, DataIndex) {
         if(indicatorTimeline.length === 0 ) return ;
 
         // Get the name of the stacks from first data point
@@ -58,7 +67,8 @@ angular.module('comoVamosColombiaApp')
             zIndex: 1,
             tooltip: {
                valueSuffix: ' ' + IndicatorUnits
-             }
+             },
+            color: _buildColorPallete(DataIndex)
           };
 
           // Build the data object
@@ -82,12 +92,13 @@ angular.module('comoVamosColombiaApp')
         } else {
           shareaxis = 0
         };
+        DataIndex = -1
         return lodash.flatten(lodash.map(datum, function(indicatorData){
           var indicatorDataUnits = indicatorData.units;
           if(indicatorDataUnits=="NaN"){
             indicatorDataUnits=""
           };
-
+          DataIndex = DataIndex + 1
 
           // Determine which kind of line we're building
           if (indicatorData.timeline.length > 0) {
@@ -97,21 +108,18 @@ angular.module('comoVamosColombiaApp')
               if(shareaxis == 1){
                 DataAxis = 0
               };
-              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
+              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis, DataIndex);
 
               case 'subjetivo ordinal':
               DataAxis = DataAxis + 1;
               if(shareaxis == 1){
                 DataAxis = 0
               };
-              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
+              return _buildObjectiveLine(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis, DataIndex);
 
               case 'subjetivo categorico':
               DataAxis = DataAxis + 1;
-              if(shareaxis == 1){
-                DataAxis = 0
-              };
-              return _buildSubjectiveCategorical(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis);
+              return _buildSubjectiveCategorical(indicatorData.name, indicatorData.description, indicatorData.city, indicatorData.timeline, indicatorDataUnits, DataAxis, DataIndex);
 
             }}}));
       };
