@@ -95,7 +95,7 @@ angular.module('comoVamosColombiaApp')
         } else {
           shareaxis = 0
         };
-        DataIndex = -1
+        var DataIndex = -1
         return lodash.flatten(lodash.map(datum, function(indicatorData){
           var indicatorDataUnits = indicatorData.units;
           if(indicatorDataUnits=="NaN"){
