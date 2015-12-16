@@ -19,9 +19,9 @@ angular.module('comoVamosColombiaApp')
       var _buildColorPallete = function(DataIndex) {
         switch(DataIndex) {
           case 0:
-            return ["#FF7863","#FF8558","#FF924D","#FF9F42","#FFAC37","#FFB92C","#FFC621","#FFD316","#FFE00B","#FFED00"]
+            return ['#FFED00', '#FFE00B', '#FFD316', '#FFC621', '#FFB92C', '#FFAC37', '#FF9F42', '#FF924D', '#FF8558', '#FF7863']
           case 1:
-            return ["#E3000F","#E61227","#E9243F","#EC3758","#EF4970","#F25C88","#F56EA1","#F881B9","#FB93D1","#FFA6EA"]
+            return ['#FFA6EA', '#FB93D1', '#F881B9', '#F56EA1', '#F25C88', '#EF4970', '#EC3758', '#E9243F', '#E61227', '#E3000F']
           }
       }
 
