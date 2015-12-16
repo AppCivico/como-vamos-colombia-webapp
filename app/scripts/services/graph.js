@@ -35,7 +35,7 @@ angular.module('comoVamosColombiaApp')
           tooltip: {
              valueSuffix: ' ' + IndicatorUnits
            },
-          color: _buildColorPallete(DataIndex)
+          color: _buildColorPallete(DataIndex)[0]
           // add other options as needed
         };
 
@@ -59,6 +59,8 @@ angular.module('comoVamosColombiaApp')
         // console.log(_options);
 
         // Build stack objects
+        colors = _buildColorPallete(DataIndex)
+        i = 0
         var _stacks = lodash.map(_options, function(stackName){
           var _serie = {
             name: indicatorCity + " : " + stackName,
@@ -69,7 +71,7 @@ angular.module('comoVamosColombiaApp')
             tooltip: {
                valueSuffix: ' ' + IndicatorUnits
              },
-            color: _buildColorPallete(DataIndex)
+            color = colors[i]
           };
 
           // Build the data object
