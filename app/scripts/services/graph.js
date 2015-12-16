@@ -60,7 +60,7 @@ angular.module('comoVamosColombiaApp')
 
         // Build stack objects
         var _colors = _buildColorPallete(DataIndex)
-        i = 0
+        var i = 0
         var _stacks = lodash.map(_options, function(stackName){
           var _serie = {
             name: indicatorCity + " : " + stackName,
