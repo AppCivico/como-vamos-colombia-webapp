@@ -71,7 +71,7 @@ angular.module('comoVamosColombiaApp')
             tooltip: {
                valueSuffix: ' ' + IndicatorUnits
              },
-            color = colors[i]
+            color: colors[i]
           };
 
           // Build the data object
