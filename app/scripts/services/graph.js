@@ -20,7 +20,7 @@ angular.module('comoVamosColombiaApp')
         switch(DataIndex) {
           case 0:
             return ["#FF7863","#FF8558","#FF924D","#FF9F42","#FFAC37","#FFB92C","#FFC621","#FFD316","#FFE00B","#FFED00"]
-        case 1:
+          case 1:
             return ["#E3000F","#E61227","#E9243F","#EC3758","#EF4970","#F25C88","#F56EA1","#F881B9","#FB93D1","#FFA6EA"]
           }
       }
@@ -73,6 +73,7 @@ angular.module('comoVamosColombiaApp')
              },
             color: _colors[i]
           };
+          i = i + 1
 
           // Build the data object
           _serie.data =  lodash.map(indicatorTimeline, function(data){
