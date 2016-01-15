@@ -30,6 +30,7 @@
   <div class="col-xs-12 col-sm-4">
     <select chosen class="form-control" name="" data-placeholder="Selecciona un Indicador..." options="main.firstSelectedOption.city.indicators" ng-model="main.firstSelectedOption.indicator" ng-options="option.description group by option.type for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
+      <option></option>
     </select>
   </div>
 </section>
@@ -51,6 +52,7 @@
   <div class="col-xs-12 col-sm-4">
     <select chosen class="form-control"name="" data-placeholder="Selecciona un Indicador..." options="main.secondSelectedOption.city.indicators" ng-model="main.secondSelectedOption.indicator" ng-options="option.description group by option.type for option in main.secondSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
+      <option></option>
     </select>
   </div>
 </section>
