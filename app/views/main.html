@@ -49,7 +49,7 @@
       <option value=""> Selecciona un tema ... </option>
     </select>
   </div>
-  <div class="col-xs-12 col-sm-12">
+  <div class="col-xs-12 col-sm-12 indicator-selector">
     <select chosen class="form-control"name="" data-placeholder="Selecciona un Indicador..." options="main.secondSelectedOption.city.indicators" ng-model="main.secondSelectedOption.indicator" ng-options="option.description group by option.type for option in main.secondSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
       <option></option>
