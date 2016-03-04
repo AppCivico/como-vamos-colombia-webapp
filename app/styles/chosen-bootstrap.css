@@ -151,3 +151,7 @@ select.form-control + .chosen-container-multi .chosen-results li.result-selected
     background-color: white;
 
 }
+
+.indicator-selector {
+  margin-top: 20px;
+}
