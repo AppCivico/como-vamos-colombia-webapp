@@ -154,4 +154,5 @@ select.form-control + .chosen-container-multi .chosen-results li.result-selected
 
 .indicator-selector {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
