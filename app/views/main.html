@@ -27,8 +27,8 @@
       <option value=""> Selecciona un tema ... </option>
     </select>
   </div>
-  <div class="col-xs-12 col-sm-12">
-    <select chosen class="form-control indicator-selector" name="" data-placeholder="Selecciona un Indicador..." options="main.firstSelectedOption.city.indicators" ng-model="main.firstSelectedOption.indicator" ng-options="option.description group by option.type for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
+  <div class="col-xs-12 col-sm-12 indicator-selector">
+    <select chosen class="form-control" name="" data-placeholder="Selecciona un Indicador..." options="main.firstSelectedOption.city.indicators" ng-model="main.firstSelectedOption.indicator" ng-options="option.description group by option.type for option in main.firstSelectedOption.category.indicators" ng-change="main.drawGraph()">
       <!-- <option>CV5 - Pensando en las ...</option> -->
       <option></option>
     </select>
