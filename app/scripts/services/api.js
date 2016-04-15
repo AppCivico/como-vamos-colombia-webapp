@@ -10,19 +10,30 @@
 angular.module('comoVamosColombiaApp')
   .service('Api', ['$http', function ($http) {
     function uriParam(param) {
-      return '/' + param;
+      if (typeof param != "undefined") {
+        return param.name;
+      }
+      return param;
     }
 
-    var baseUrl = 'http://104.154.49.35:5000/';
+    var baseUrl = 'http://104.154.65.248:5000/';
     var uri = {
       cities: baseUrl + 'cities',
+      cities_indicator: function(indicator) {
+        return baseUrl + 'cities_with_indicator?indicator=' + uriParam(indicator);
+      },
       indicator: function(city, indicator) {
-        return baseUrl + 'indicator' + uriParam(city) + uriParam(indicator);
+        console.log(baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator));
+        return baseUrl + 'indicator?city=' + uriParam(city) + '&indicator=' + uriParam(indicator);
       },
     };
 
     var _cities = function() {
       return $http.get(uri.cities);
+    };
+
+    var _cities_indicator = function(indicator) {
+      return $http.get(uri.cities_indicator(indicator))
     };
 
     var _indicator = function(city, indicator) {
@@ -200,10 +211,10 @@ angular.module('comoVamosColombiaApp')
           }
         ];
     };
-
     return {
       cities: _cities,
       indicator: _indicator,
+      cities_indicator: _cities_indicator,
 
       // dummy datasets
       dummy_cities: _dummy_cities,
